@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>
+        <li th:each="dto, status : ${list}" th:if="${dto.sno % 5 == 0}">
+            [[${status.index}]] [[${dto}]]
+        </li>
+    </ul>
+
+    <style>
+        .red {
+            background-color: red;
+        }
+    </style>
+
+    <ul>
+        <li th:each="dto, status : ${list}">
+            <span th:class="${dto.sno % 5 == 0}?'red'">[[${dto}]]</span>
+        </li>
+    </ul>
+</body>
+</html>
