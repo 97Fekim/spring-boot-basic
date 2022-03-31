@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.zerock.guestbook1.dto.GuestbookDTO;
+import org.zerock.guestbook1.dto.PageRequestDTO;
+import org.zerock.guestbook1.dto.PageResultDTO;
+import org.zerock.guestbook1.entity.GuestBook;
+
+import java.util.List;
 
 @SpringBootTest
 public class GuestbookServiceTests {
@@ -13,10 +18,23 @@ public class GuestbookServiceTests {
     @Test
     public void testRegister(){
         GuestbookDTO dto = new GuestbookDTO();
-        dto.setTitle("registerd title...");
-        dto.setContent("registerd content...");
-        dto.setWriter("registerd writer...");
+        dto.setTitle("registered title...");
+        dto.setContent("registered content...");
+        dto.setWriter("registered writer...");
 
         System.out.println(service.register(dto));
+    }
+
+    @Test
+    public void testGetList(){
+        service.getList(new PageRequestDTO(2, 10)).getDtoList().forEach(dto -> {
+            System.out.println(dto);
+        });
+    }
+
+    @Test
+    public void testGetPageList() {
+        PageResultDTO<GuestbookDTO, GuestBook> dto = service.getList(new PageRequestDTO(1,10));
+        System.out.println(dto);
     }
 }

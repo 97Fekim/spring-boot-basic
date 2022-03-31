@@ -32,14 +32,15 @@ public class GuestbookServiceImpl implements GuestbookService{
         return entity.getGno();
     }
 
-   /* @Override
-    public PageResultDTO<GuestbookDTO, GuestBook> getList(PageRequestDTO requestDTO) {
-        Pageable pageable = requestDTO.getPageable(Sort.by("gno").descending());
+    @Override
+    public PageResultDTO<GuestbookDTO, GuestBook> getList(PageRequestDTO requestDTO){
+        Pageable pageable = requestDTO.getPage(Sort.by("gno").descending());
 
         Page<GuestBook> result = repository.findAll(pageable);
 
-        Function<GuestBook, GuestbookDTO> fn = (entity ->
-                entityToDto(entity));
+        Function<GuestBook, GuestbookDTO> fn = (entity -> entityToDto(entity));
+
         return new PageResultDTO<>(result, fn);
-    }*/
+    }
+
 }

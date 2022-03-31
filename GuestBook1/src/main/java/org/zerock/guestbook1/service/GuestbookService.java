@@ -8,7 +8,7 @@ import org.zerock.guestbook1.entity.GuestBook;
 public interface GuestbookService {
 
     Long register(GuestbookDTO dto);
-    //PageResultDTO<GuestbookDTO, GuestBook> getList(PageRequestDTO requestDTO);
+    PageResultDTO<GuestbookDTO, GuestBook> getList(PageRequestDTO requestDTO);
 
     default GuestBook dtoToEntity(GuestbookDTO dto){
         GuestBook entity = GuestBook.builder()
