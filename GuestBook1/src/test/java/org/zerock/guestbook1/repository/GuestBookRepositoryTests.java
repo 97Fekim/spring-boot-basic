@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.zerock.guestbook1.entity.GuestBook;
 import org.zerock.guestbook1.entity.QGuestBook;
 
-import java.nio.file.OpenOption;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -31,6 +31,15 @@ public class GuestBookRepositoryTests {
                     .build();
             System.out.println(guestBookRepository.save(guestBook));
         });
+
+    }
+
+    @Test
+    public void testQueryMethod(){
+        List<GuestBook> list = guestBookRepository.findByGnoBetweenOrderByGnoDesc(35L, 55L);
+        list.forEach(guestBook ->{
+            System.out.println(guestBook);
+                });
 
     }
 
@@ -72,7 +81,6 @@ public class GuestBookRepositoryTests {
         builder.and(exAll);
 
         Page<GuestBook> result = guestBookRepository.findAll(builder, pageable);
-
         result.stream().forEach(guestBook -> {
             System.out.println(guestBook);
         });
