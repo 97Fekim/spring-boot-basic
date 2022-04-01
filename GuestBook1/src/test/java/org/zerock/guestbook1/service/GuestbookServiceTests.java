@@ -8,8 +8,6 @@ import org.zerock.guestbook1.dto.PageRequestDTO;
 import org.zerock.guestbook1.dto.PageResultDTO;
 import org.zerock.guestbook1.entity.GuestBook;
 
-import java.util.List;
-
 @SpringBootTest
 public class GuestbookServiceTests {
     @Autowired
@@ -36,5 +34,10 @@ public class GuestbookServiceTests {
     public void testGetPageList() {
         PageResultDTO<GuestbookDTO, GuestBook> dto = service.getList(new PageRequestDTO(1,10));
         System.out.println(dto);
+    }
+
+    @Test
+    public void testGetOne(){
+        System.out.println(service.read(50L));
     }
 }

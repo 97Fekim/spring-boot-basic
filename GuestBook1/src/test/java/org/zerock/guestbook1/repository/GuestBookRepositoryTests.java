@@ -23,7 +23,7 @@ public class GuestBookRepositoryTests {
 
     @Test
     public void insertDummies() {
-        IntStream.rangeClosed(1,50).forEach(i ->{
+        IntStream.rangeClosed(1,400).forEach(i ->{
             GuestBook guestBook = GuestBook.builder()
                     .title("title..."+i)
                     .content("content..."+i)
