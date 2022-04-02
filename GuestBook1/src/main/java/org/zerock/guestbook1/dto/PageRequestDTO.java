@@ -11,8 +11,10 @@ import org.springframework.data.domain.Sort;
 @AllArgsConstructor
 @Data
 public class PageRequestDTO {
-   private int page;    // 몇번째 페이지를 가져올건지
-   private int size;    // 한번에 몇 개의 페이지를 가져올건지
+    private int page;    // 몇번째 페이지를 가져올건지
+    private int size;    // 한번에 몇 개의 페이지를 가져올건지
+    private String type;
+    private String keyword;
 
    public PageRequestDTO(){
        this.page = 1;

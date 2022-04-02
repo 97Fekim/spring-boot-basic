@@ -27,10 +27,10 @@ public class GuestbookController {
     }
 
     @GetMapping("/list")    // 자동으로 modelAttribute가 되긴 하지만, 적어주자
-    public void list(@ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO
+    public void list(@ModelAttribute("requestDTO") PageRequestDTO requestDTO
             , Model model){
-        log.info("list........" + pageRequestDTO);
-        model.addAttribute("result", service.getList(pageRequestDTO));
+        log.info("==========(Controller-get) list=========");
+        model.addAttribute("result", service.getList(requestDTO));
     }
 
     @GetMapping("/register")
@@ -46,9 +46,32 @@ public class GuestbookController {
         return "redirect:/guestbook/list";
     }
 
-    @GetMapping("/read")
+    @GetMapping({"/read", "/modify"})
     public void read(Long gno, @ModelAttribute("requestDTO") PageRequestDTO requestDTO, Model model){
         log.info("=========(Controller-get) read=========");
         model.addAttribute("dto", service.read(gno));
     }
+
+    @PostMapping("/remove")
+    public String remove(Long gno, RedirectAttributes redirectAttributes){
+        log.info("==========(Controller-post) remove==========");
+        service.remove(gno);
+        redirectAttributes.addFlashAttribute("msg", gno);
+        return "redirect:/guestbook/list";
+    }
+
+    @PostMapping("/modify")
+    public String modify(GuestbookDTO dto,
+                         @ModelAttribute("requestDTO")PageRequestDTO requestDTO,
+                         RedirectAttributes redirectAttributes){
+        log.info("==========(Controller-post) modify==========");
+        service.modify(dto);
+        redirectAttributes.addAttribute("gno", dto.getGno());
+        redirectAttributes.addAttribute("page", requestDTO.getPage());
+        redirectAttributes.addAttribute("type", requestDTO.getType());
+        redirectAttributes.addAttribute("keyword", requestDTO.getKeyword());
+
+        return "redirect:/guestbook/read";
+    }
+
 }
