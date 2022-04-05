@@ -1,6 +1,8 @@
 package org.zerock.board.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.zerock.board.dto.ReplyDTO;
 import org.zerock.board.entity.Board;
@@ -10,6 +12,7 @@ import org.zerock.board.repository.ReplyRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Log4j2
 @Service
 @RequiredArgsConstructor
 public class ReplyServiceImpl implements ReplyService {
@@ -23,7 +26,7 @@ public class ReplyServiceImpl implements ReplyService {
 
         replyRepository.save(reply);
 
-        return replyDTO.getRno();
+        return reply.getRno();
     }
 
     @Override
