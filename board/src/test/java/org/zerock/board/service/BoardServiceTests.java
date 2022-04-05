@@ -44,7 +44,7 @@ public class BoardServiceTests {
 
     @Test
     public void testDelete(){
-        boardService.removeWithReplies(98L);
+        boardService.removeWithReplies(97L);
     }
 
     @Test

@@ -9,6 +9,7 @@ import org.zerock.board.entity.Board;
 import org.zerock.board.entity.Reply;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -48,5 +49,13 @@ public class ReplyRepositoryTests {
         }
     }
 
+    @Test
+    public void testListByBoard(){
+        List<Reply> replyList = replyRepository.getRepliesByBoardOrderByRno(Board.builder()
+                .bno(9L)
+                .build());
+
+        replyList.forEach(reply -> System.out.println(reply));
+    }
 
 }

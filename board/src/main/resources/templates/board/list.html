@@ -11,6 +11,28 @@
             </a>
         </span>
 
+        <!-- Search Form -->
+        <form action="/board/list" method="get" id="searchForm">
+            <div class="input-group">
+                <input type="hidden" name="page" value="1"> <!-- 1페이지로 바로가기 위해서 삽입 -->
+                <div class="input-group-prepend">
+                    <select class="custom-select" name="type">
+                        <option th:selected="${pageRequestDTO.type == null}">------</option>
+                        <option value="t" th:selected="${pageRequestDTO.type == 't'}">제목</option>
+                        <option value="c" th:selected="${pageRequestDTO.type == 'c'}">내용</option>
+                        <option value="w" th:selected="${pageRequestDTO.type == 'w'}">작성자</option>
+                        <option value="tc" th:selected="${pageRequestDTO.type == 'tc'}">제목+내용</option>
+                        <option value="tcw" th:selected="${pageRequestDTO.type == 'tcw'}">제목+내용+작성자</option>
+                    </select>
+                </div>
+                <input class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
+                <div class="input-group-append" id="button-addon4">
+                    <button class="btn btn-outline-secondary btn-search" type="button">Search</button>
+                    <button class="btn btn-outline-secondary btn-clear" type="button">Clear</button>
+                </div>
+            </div>
+        </form>
+
         <!-- board list -->
         <table class="table table-striped">
             <thead>
@@ -60,5 +82,28 @@
             </li>
 
         </ul>
+
+        <script th:inline="javascript">
+            /* Redirect modal handler */
+            var msg = [[${msg}]];
+            console.log(msg);
+
+            if(msg){
+                $(".modal").modal();
+            }
+
+            /* search form hanlder */
+            var searchForm = $("#searchForm");
+            // submit
+            $(".btn-search").click(function(e){
+                searchForm.submit();
+            })
+            // clear
+            $(".btn-clear").click(function(e){
+                searchForm.empty().submit();
+            })
+
+
+        </script>
     </th:block>
 </th:block>
