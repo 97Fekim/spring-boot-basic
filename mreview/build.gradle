@@ -30,7 +30,7 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time'
-
+    implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.1'
 }
 
 tasks.named('test') {
