@@ -5,22 +5,26 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+@Embeddable
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@ToString(exclude = "movie")
-public class MovieImage {       // 영화에 사용할 이미지에 대한 정보를 기록하는 클래스입니다.
+@ToString(exclude = "movie") //연관 관계시 항상 주의
+public class MovieImage  {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long inum;
 
     private String uuid;
 
-    private String imgName; // 이미지의 이름
+    private String imgName;
 
-    private String path;    // 이미지의 저장 경로 (년/월/일 폴더 구조)
+    private String path;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) //무조건 lazy로
     private Movie movie;
+
+
 }
