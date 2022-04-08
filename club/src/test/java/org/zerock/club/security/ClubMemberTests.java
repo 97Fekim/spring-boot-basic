@@ -8,6 +8,7 @@ import org.zerock.club.entity.ClubMember;
 import org.zerock.club.entity.ClubMemberRole;
 import org.zerock.club.repository.ClubMemberRepository;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -42,6 +43,33 @@ public class ClubMemberTests {
             }
             repository.save(clubMember);
         });
+
+    }
+
+    @Test
+    public void insertFekim(){
+        ClubMember clubMember = ClubMember.builder()
+                .email("16fekim@gmail.com")
+                .name("Fekim")
+                .fromSocial(true)
+                .password(passwordEncoder.encode("Fekim179546a!"))
+                .build();
+        clubMember.addMemberRole(ClubMemberRole.USER);
+        clubMember.addMemberRole(ClubMemberRole.MANAGER);
+        clubMember.addMemberRole(ClubMemberRole.ADMIN);
+
+        repository.save(clubMember);
+
+    }
+
+    @Test
+    public void testRead(){
+        Optional<ClubMember> result = repository.findByEmail("user40@gmail.com", false);
+
+        if(result.isPresent()){
+            ClubMember clubMember = result.get();
+            System.out.println(clubMember);
+        }
 
     }
 
